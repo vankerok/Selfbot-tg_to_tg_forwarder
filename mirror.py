@@ -18,16 +18,16 @@ def telegram_client_authorise():
         me = client.get_me()
         account_username = me.username
         
-        logger.success(f"Выполнен вход как @{account_username}")
+        logger.success(f"Logged in as @{account_username}")
         receiver = InputPeerChat(forward_to)
         return receiver, client
     
     except Exception as auth_error:
             if "database is locked" in str(auth_error):
-                logger.error('Бот уже запущен в другом окне')
+                logger.error('Bot is already running in another window')
                 raise auth_error
             else:
-                logger.error(f"Возникла ошибка при авторизации: {auth_error}")
+                logger.error(f"Loggining error: {auth_error}")
                 raise auth_error
 
 def get_message_type(message):
@@ -58,8 +58,8 @@ async def handler(event):
                 forward_messages.append(replied_to_message)
 
         await client.forward_messages(forward_to, forward_messages, with_my_score=True)
-        logger.success(f'''Сообщение было успешно переслано: "{get_message_type(event.message)}"''')
+        logger.success(f'''Message was successfully forwarded: "{get_message_type(event.message)}"''')
     except Exception as forward_error:
-        logger.error(f"Ошибка при перессылке сообщения: {forward_error}")
+        logger.error(f"Error while forwarding message: {forward_error}")
 
 client.run_until_disconnected()

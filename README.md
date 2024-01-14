@@ -1,3 +1,3 @@
-This code mirrors all type of messages/posts from any channels into ONE specific channel or forum thread :D
+This code forwards all type of messages/posts from any channels&groups into ONE specific channel, group or forum thread
 
 pip install -r requirements.txt
